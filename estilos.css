@@ -1,0 +1,140 @@
+html { height: 100%;
+			background-color: #f5f5e6;
+	}
+body { height: 100%; 
+	}
+form { height: 98%; }
+  .tablaext {
+		border-collapse: collapse;
+		height: 100% ;
+		width: 100% ;
+  }
+  .tablaext h2{
+		margin: 1px;
+  }
+	.tablaext th{  
+    margin:1px;
+	}
+  .tablacert {
+    border-collapse: collapse;
+    box-shadow: 0px 0px 8px #000;
+    margin:auto;
+    background-color:#eaeaec;
+    width: 98% ;
+    height: 98%;	
+  }
+  .tablaenc {
+    border-collapse: collapse;
+    margin:auto;
+  }
+  	.tabladet {
+    border-collapse: collapse;
+    margin: auto;
+  }
+  .tabladet th{  
+    border: none;
+    padding: 3px;
+    background-color:#dddddf;	
+    
+  }  
+  .tabladet td{  
+    padding: 3px;	  
+    border-collapse: collapse;
+    border: 1px solid #bfbfbe;
+    
+  }
+  .tabladet tr{  
+    border: 1px solid #000;
+    padding: 5px;
+    background-color:#eaeaec;	  
+  }
+  
+  
+	.tabladet_alternado {
+		border-collapse: collapse;
+		margin:20px;
+	}
+	.tabladet_alternado th{  
+		padding: 5px;
+		background-color:#dddddf;	  
+	}  
+	.tabladet_alternado td{  
+		padding: 5px;  
+	}
+	.tabladet_alternado tr{  
+		border: 1px solid #000;
+		padding: 5px;
+		background-color:#eaeaec;	  
+	}
+	.tabladet_alternado tr:nth-child(odd) {
+		background-color:#CCD1D7;
+	}
+	.tabladet_alternado tr:nth-child(odd):hover {
+		background-color: #16D6B0;
+	}
+	.tabladet_alternado tr:nth-child(even) {
+		background-color:#E8EBED;
+	}
+	.tabladet_alternado tr:nth-child(even):hover {
+		background-color: #16D6B0;
+	}
+	
+  .tabladetnb {
+    border-collapse: collapse;
+    margin:20px;
+  }
+  .tabladetnb th{  
+    padding: 5px;
+    background-color:#dddddf;	  
+  }  
+  .tabladetnb td{  
+    padding: 5px;  
+  }
+  .tablavoto {
+    border-collapse: collapse;
+    margin:20px;
+  }
+  .tablavoto th{  
+    border: 1px solid #000;
+    padding: 5px;
+    background-color:#dddddf;	  
+  }  
+  .tablavoto td{  
+    border: 1px solid #000;
+    padding: 5px;
+    background-color:#eaeaec;	  
+  }
+  .tablaerror {
+    border-collapse: collapse;
+    margin:20px;
+  }
+  .tablaerror th{  
+    border: 1px solid #000;
+    padding: 5px;
+    background-color:#eedddf;	  
+  }  
+  .tablaerror td{  
+    border: 1px solid #000;
+    padding: 5px;
+    background-color:#eeaeae;	  
+  }
+  .tablapie {
+    border-collapse: collapse;
+    margin:20px;
+  }
+  .botonmenu{
+    width:200px;
+  }
+  .tablacampos{
+	border: none ;
+  }
+  .tablacampos td{
+    border: none ;
+  }
+
+   .selbut {
+	width: 450px ;
+	height: 100px ;
+	font-size: 32px;
+	font-family: elvetica;
+   }
