@@ -18,13 +18,92 @@
 			$this->lista_campos_lectura=array();
 			$this->lista_campos_lectura[]=new campo_entidad( 'Id' 			, 'pk' 		, '#' , NULL ,true) ;
 			$this->lista_campos_lectura[]=new campo_entidad( 'Corredor_Id' 	, 'number' 	, 'Corredor'  ) ;
-			$this->lista_campos_lectura[]=new campo_entidad( 'Tiempo' 	, 'datetime' 	, 'Tiempo'  ) ;
+			$this->lista_campos_lectura[]=new campo_entidad( 'Tiempo' 	, 'timestamp' 	, 'Tiempo'  ) ;
+			$this->lista_campos_lectura[2]->pone_readonly();
 			//
 			// Nombre de la tabla
 			$this->nombre_tabla = "Llegadas" ;
 			$this->nombre_fisico_tabla = "llegada" ;																		
 			//
 			//
+		}	
+		public function texto_agregar_okGrabar() 
+		{
+			//$nomid = $this->prefijo_campo.'id';
+			//$this->Set_id($_POST[$nomid]);
+			$this->error= false ;
+			//$this->Leer();
+			//
+			// Abre la conexión con la base de datos
+			$cn=new Conexion();
+			//
+			// Arma lista de campos a agregar
+			$lst_cmp = '';
+			$lst_val = '';
+			$primerCampo = true;
+			$i = 0 ;
+			$tn_valor_id = 0 ;
+			foreach ( $this->lista_campos_lectura as $campo )
+				{
+					//
+					// tipo de campo
+					$tp = $campo->tipo() ;
+					//
+					$readonly = $campo->readonly() ;
+					//
+					// tipos de camos validos
+					if ( $tp != 'otro' and ( $tp != 'pk' or $this->clave_manual ) and !$readonly)
+						{
+						//
+						// Agrega coma
+						if ( $primerCampo == false )
+							{
+								$lst_cmp = $lst_cmp.', ' ;
+								$lst_val = $lst_val.', ' ;
+							}
+						else
+							{
+								$primerCampo = false ;
+								
+							}
+						//
+						// Nombre de campo
+						$nomCtrl = $this->prefijo_campo.'cpoNro'.$i.'_'  ;
+						//
+						// Valor a reemplazar en el campo
+						if ( $tp == 'time' ) $valor = '1899-12-30 '.$_POST[$nomCtrl] ;
+						else $valor = $_POST[$nomCtrl] ;
+						if ( $tp == 'pk' ) $this->id = $valor ;
+						//
+						// Lista campos
+						$lst_cmp = $lst_cmp. $campo->nombre() ;
+						//
+						// Lista valores
+						$lst_val = $lst_val."'".$valor."'" ;
+						}
+					$i++;
+				}
+			$strsql = ' INSERT INTO '.$this->nombre_fisico_tabla.' ( '.$lst_cmp.' )  VALUES ( '.$lst_val. ' ) ';
+			//
+			// Cierra la conexion
+			$insertado = $cn->conexion->query($strsql) ;
+			if ( $insertado ) 
+				{ 
+					if ( ! $this->clave_manual )
+					{
+						$result = $cn->conexion->query('SELECT last_insert_id()');
+						$reg = $result->fetch_array(MYSQLI_NUM);
+						$this->id = $reg[0];
+						$result->free();
+					}
+				}
+			else
+				{
+					// die( "Problemas en el insert de ".$this->nombre_tabla." : ".$cn->conexion->error.$strsql ) ;
+					$this->error = true ;
+					$this->textoError = "Problemas en el insert de ".$this->nombre_tabla." : ".$cn->conexion->error.' '.$strsql ;
+				}
+			$cn->cerrar();
 		}	
 
 		protected function crear_tabla ()
@@ -33,7 +112,7 @@
 								CREATE TABLE llegada
 								( 	Id INT PRIMARY KEY AUTO_INCREMENT ,
 									Corredor_Id INT ,
-									Tiempo TIMESTAMP
+									Tiempo TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 								) ;
 							" ;
 		}
