@@ -7,7 +7,7 @@ class Conexion {
   private $usr ;
   private $pass ;
   private $db ;
-	private $extension ;
+  private $extension ;
   public function __construct()
   {
 	//
@@ -21,6 +21,16 @@ class Conexion {
 		$this->host = 'localhost';		
 		$this->usr = 'root';
 		$this->pass = '' ;
+		$this->extension = 'mysql' ;
+		}
+	//
+	// Mint
+	if($this->dr == '/var/www/html' )
+		{
+		$this->db = 'puestos' ;
+		$this->host = 'localhost';		
+		$this->usr = 'root';
+		$this->pass = 'root' ;
 		$this->extension = 'mysql' ;
 		}
 	//
