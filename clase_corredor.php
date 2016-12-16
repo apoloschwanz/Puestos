@@ -111,8 +111,7 @@
 								CREATE TABLE corredor
 								( 	Id INT PRIMARY KEY AUTO_INCREMENT ,
 									Nombre varchar(150) ,
-									Carrera_Id INT,
-									Inicio INT
+									Carrera_Id INT
 								) ;
 							" ;
 		}

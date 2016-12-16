@@ -11,11 +11,14 @@
 			$this->lista_campos_lista=array();
 			$this->lista_campos_lista[]=new campo_entidad( 'Id' 			, 'pk' 		, '#' , NULL ,true) ;
 			$this->lista_campos_lista[]=new campo_entidad( 'Nombre' 	, 'text' 	, 'Nombre'  ) ;
+			$this->lista_campos_lista[]=new campo_entidad( 'Inicio'		, 'datetime' , 'Inicio' ) ;
 			//
 			//
 			$this->lista_campos_lectura=array();
 			$this->lista_campos_lectura[]=new campo_entidad( 'Id' 			, 'pk' 		, '#' , NULL ,true) ;
 			$this->lista_campos_lectura[]=new campo_entidad( 'Nombre' 	, 'text' 	, 'Nombre'  ) ;
+			$this->lista_campos_lectura[]=new campo_entidad( 'Inicio'		, 'datetime' , 'Inicio' ) ;
+			$this->lista_campos_lectura[2]->readonly();
 			//
 			// Nombre de la tabla
 			$this->nombre_tabla = "Carrera" ;
@@ -101,6 +104,52 @@
 				}
 			$cn->cerrar();
 		}	
+	protected function Pone_Datos_Fijos_Personalizables()
+	{
+		//
+		// Prefijo campo
+		$this->prefijo_campo = 'm_'.get_class($this).'_' ;
+		//
+		// Nombre de la pagina
+		$this->nombre_pagina = $_SERVER['PHP_SELF'] ;
+		//
+		// Paginacion
+		$this->desde = 0 ;																					// by DZ 2015-08-14 - agregado lista de datos
+		$this->cuenta = 10 ;																				// by DZ 2015-08-14 - agregado lista de datos		
+		//
+		// Acciones Extra para texto_mostrar_abm
+		$this->acciones[] = array( 'nombre'=>'okIniciaCarrera' , 'texto'=>'IniciarCarrera' ) ;
+		//
+		// Botones Extra para texto_mostrar_abm
+		//$this->botones_extra_abm[] = array( 'nombre'=>$this->prefijo_campo.'_okExportar' , 'texto'=>'Exportar' ) ;
+		
+		//
+		// Botones extra edicion
+		//$this->botones_extra_edicion[] = array( 'name'=> '_Rel1' ,
+		//										'value'=>'Salir' ,
+		//										'link'=>'salir.php' ) ; // '<input type="submit" name="'.$this->prefijo_campo.'_Rel1" value="Salir" autofocus>
+		//
+		// Filtros
+		$this->con_filtro_fecha = false;
+		//
+		//
+	}
+	protected function maneja_evento_accion_especial()
+		{  
+			/* $tts_aux = '<br>Selecciono accion especial: ' .  $this->accion_ok ;
+				$tts_aux .= '<br> Para el Id : '.$this->id ;
+				$tts_aux .= '<br> Modificando el evento maneja_evento_accion_especial ' ;
+				echo $tts_aux  ;
+			*/
+			// UPDATE `table` SET the_col = current_timestamp //
+			// "update `table` set date_date=now()"
+			$this->strsql = ' UPDATE '.$this->nombre_fisico_tabla. ' ' ;
+			$this->strsql .= ' SET Inicio = current_timestamp ' ; 
+			$this->strsql .= ' WHERE Id = '.$this->id ;
+			$this->ejecuta_sql();
+			// Vuelve a la pantalla
+			$this->mostrar_lista_abm() ;
+		}
 
 		protected function crear_tabla ()
 		{

@@ -246,7 +246,7 @@ class entidadj {
 		$this->cuenta = 10 ;																				// by DZ 2015-08-14 - agregado lista de datos		
 		//
 		// Acciones Extra para texto_mostrar_abm
-		//$this->acciones = array( 'nombre'=>'okAsignarDte' , 'texto'=>'AsignarDte' ) ;
+		//$this->acciones[] = array( 'nombre'=>'okAsignarDte' , 'texto'=>'AsignarDte' ) ;
 		//
 		// Botones Extra para texto_mostrar_abm
 		//$this->botones_extra_abm[] = array( 'nombre'=>$this->prefijo_campo.'_okExportar' , 'texto'=>'Exportar' ) ;
@@ -277,9 +277,9 @@ class entidadj {
 				$tts_aux .= '<br> Modifique el evento maneja_evento_accion_especial ' ;
 				die( $tts_aux ) ;
 		}
-		//
-		// Funciones que no hace falta redefinir
-		//
+	//
+	// Funciones que no hace falta redefinir
+	//
 	public function __construct()
   	{
 			//
@@ -1410,6 +1410,23 @@ class entidadj {
 		if ( $this->cuenta )
 			$this->strsql .= ' LIMIT '. $this->desde . ' , ' . $this->cuenta ;
 	}
+	public function ejecuta_sql()
+	{ 		
+		$cn=new Conexion();
+		$this->registros=mysqli_query($cn->conexion,$this->strsql) or
+				die("Problemas en el sql de".$this->nombre_tabla.": ".mysqli_error($cn->conexion). " id = ".$this->id. " <br><br> Sql= ".$this->strsql );
+		$cn->cerrar();
+		/*if ( $this->registro=mysqli_fetch_array($this->registros) )
+			{
+				$this->existe = true ;
+				mysqli_data_seek ( $this->registros , 0 ) ;	
+			}
+		else
+			{
+				$this->existe = false ;
+			}
+		*/
+	}	
 	public function Leer()
 	{ $this->Carga_Sql_Lectura();		
 		$cn=new Conexion();
@@ -1802,7 +1819,7 @@ class entidadj {
 				}
 				foreach( $this->acciones as $accion )
 					{
-						//$txt=$txt.' <a href="'.$this->nombre_pagina.'?'.$this->prefijo_campo.'_Id='.$reg[0].'&'.$this->prefijo_campo.$accion['nombre'].'=1">'.$accion['texto'].'</a>' ;
+						$txt=$txt.' <a href="'.$this->nombre_pagina.'?'.$this->prefijo_campo.'_Id='.$reg[0].'&'.$this->prefijo_campo.$accion['nombre'].'=1">'.$accion['texto'].'</a>' ;
 					} 
 					$txt=$txt.'</td>' ;
 					$txt=$txt.'</tr>';
