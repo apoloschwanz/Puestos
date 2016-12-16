@@ -17,7 +17,7 @@
 			//
 			$this->lista_campos_lectura=array();
 			$this->lista_campos_lectura[]=new campo_entidad( 'Id' 			, 'pk' 		, '#' , NULL ,true) ;
-			$this->lista_campos_lectura[]=new campo_entidad( 'Corredor_Id' 	, 'number' 	, 'Corredor'  ) ;
+			$this->lista_campos_lectura[]=new campo_entidad( 'Corredor_Id' 	, 'fk' 	, 'Corredor'  ,new corredor()) ;
 			$this->lista_campos_lectura[]=new campo_entidad( 'Tiempo' 	, 'timestamp' 	, 'Tiempo'  ) ;
 			$this->lista_campos_lectura[2]->pone_readonly();
 			//
