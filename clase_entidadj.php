@@ -10,6 +10,7 @@ class campo_entidad {
 	protected $mostrar ;
 	protected $busqueda ;
 	protected $valor ;
+	protected $readonly ;
 	public function __construct($nombre_del_campo,$tipo = 'text',$descripcion=NULL,$objeto_del_campo=NULL,$forzar_mostrar=false)
 	{
 		$this->nombre = $nombre_del_campo ;
@@ -21,6 +22,7 @@ class campo_entidad {
 		else
 			$this->mostrar = true ;
 		$this->busqueda = false ;
+		$this->readonly = false ;
 	}
 	public function nombre() { return $this->nombre ; }
 	public function tipo() { return $this->tipo ; }
@@ -31,6 +33,8 @@ class campo_entidad {
 	public function busqueda() { return $this->busqueda ; }
 	public function pone_valor($valor) { $this->valor = $valor ; }
 	public function valor() { return $this->valor ; }
+	public function pone_readonly() { $this->readonly = true ;}
+	public function readonly() { return $this->readonly ; }
 	public function valor_sql()
 	{
 		$tv_valor = $this->valor_saneado() ;
@@ -703,7 +707,7 @@ class entidadj {
 						$txt .= $cpo->txtMostrarOculto() ;
 						$txt = $txt.$cpo->txtMostrarEtiqueta() ;
 					}
-					elseif( $this->lista_campos_lectura[$i]->tipo() == 'otro' )
+					elseif( $this->lista_campos_lectura[$i]->tipo() == 'otro' or $this->lista_campos_lectura[$i]->readonly() )
 						{ 
 							$cpo->pone_tipo( 'text' ) ;
 							$txt = $txt.$cpo->txtMostrarEtiqueta() ;
@@ -1115,14 +1119,14 @@ class entidadj {
 			{
 				//
 				// Arma la página para agregar		
-				$pagina=new Paginai($this->nombre_tabla ,'<input type="submit" value="Grabar" name="'.$this->okGrabaAgregar.'"><input type="submit" value="Salir" name="'.$this->okSalir.'">');
+				$pagina=new Paginaj($this->nombre_tabla ,'<input type="submit" value="Grabar" name="'.$this->okGrabaAgregar.'"><input type="submit" value="Salir" name="'.$this->okSalir.'">');
 				//$txt = $this->texto_Ver_Lado_Uno();
 				//$pagina->insertarCuerpo($txt);
 				
-				$txt = 	$this->texto_agregar();
+				$txt = $this->texto_mostrar_abm() ;
 				$pagina->insertarCuerpo($txt);
 				//
-				$txt = $this->texto_mostrar_abm() ;
+				$txt = 	$this->texto_agregar();
 				$pagina->insertarCuerpo($txt);
 				$pagina->graficar_c_form($_SERVER['PHP_SELF']);
 				
