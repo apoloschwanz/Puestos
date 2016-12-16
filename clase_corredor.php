@@ -1,5 +1,5 @@
 <?php
-	class llegada extends entidadj {
+	class corredor extends entidadj {
  		protected function Pone_Datos_Fijos_No_Heredables()
 		{	
 			//
@@ -10,20 +10,19 @@
 			//$this->clave_manual_activar() ; // La clave de la entidad se ingresa manualment
 			$this->lista_campos_lista=array();
 			$this->lista_campos_lista[]=new campo_entidad( 'Id' 			, 'pk' 		, '#' , NULL ,true) ;
-			$this->lista_campos_lista[]=new campo_entidad( 'Corredor_Id' 	, 'fk' 	, 'Corredor'  ,new corredor()) ;
+			$this->lista_campos_lista[]=new campo_entidad( 'Nombre' 	, 'text' 	, 'Nombre'  ) ;
 			$this->lista_campos_lista[1]->pone_busqueda() ;
-			$this->lista_campos_lista[]=new campo_entidad( 'Tiempo' 	, 'datetime' 	, 'Tiempo'  ) ;
+			$this->lista_campos_lista[]=new campo_entidad( 'Carrera_Id' 	, 'fk' 	, 'Carrera', new carrera()  ) ;
 			//
 			//
 			$this->lista_campos_lectura=array();
 			$this->lista_campos_lectura[]=new campo_entidad( 'Id' 			, 'pk' 		, '#' , NULL ,true) ;
-			$this->lista_campos_lectura[]=new campo_entidad( 'Corredor_Id' 	, 'fk' 	, 'Corredor'  ,new corredor()) ;
-			$this->lista_campos_lectura[]=new campo_entidad( 'Tiempo' 	, 'timestamp' 	, 'Tiempo'  ) ;
-			$this->lista_campos_lectura[2]->pone_readonly();
+			$this->lista_campos_lectura[]=new campo_entidad( 'Nombre' 	, 'text' 	, 'Nombre'  ) ;
+			$this->lista_campos_lectura[]=new campo_entidad( 'Carrera_Id' 	, 'fk' 	, 'Carrera', new carrera()  ) ;
 			//
 			// Nombre de la tabla
-			$this->nombre_tabla = "Llegadas" ;
-			$this->nombre_fisico_tabla = "llegada" ;																		
+			$this->nombre_tabla = "Corredor" ;
+			$this->nombre_fisico_tabla = "corredor" ;																		
 			//
 			//
 		}	
@@ -109,10 +108,11 @@
 		protected function crear_tabla ()
 		{
 			$this->strsql = "
-								CREATE TABLE llegada
+								CREATE TABLE corredor
 								( 	Id INT PRIMARY KEY AUTO_INCREMENT ,
-									Corredor_Id INT ,
-									Tiempo TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+									Nombre varchar(150) ,
+									Carrera_Id INT,
+									Inicio INT
 								) ;
 							" ;
 		}
