@@ -6,11 +6,10 @@ require_once('class_paginai.php');
 require_once('clase_entidadj.php');
 require_once('clase_carrera.php');
 require_once('clase_corredor.php');
-require_once('clase_llegada.php');
 
-$entidad = new llegada() ;
+$entidad = new corredor() ;
 
-$entidad->mostrar_pagina_alta();
+$entidad->mostrar_pagina_lista();
 
 //include_once('carga_llegada.view.php');
 

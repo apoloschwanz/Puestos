@@ -6,11 +6,11 @@ require_once('class_paginai.php');
 require_once('clase_entidadj.php');
 require_once('clase_carrera.php');
 require_once('clase_corredor.php');
-require_once('clase_llegada.php');
+require_once('clase_posicion.php');
 
-$entidad = new llegada() ;
+$entidad = new posicion() ;
 
-$entidad->mostrar_pagina_alta();
+$entidad->mostrar_posiciones();
 
 //include_once('carga_llegada.view.php');
 
