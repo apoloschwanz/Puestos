@@ -165,6 +165,7 @@ class Campo {
 				$txt=$txt.' name="'.$this->nombre.'" ' ;
 				$txt=$txt.' type="'.$this->tipo.'" ' ;
 				$txt=$txt.' value="'.$this->valor.'" ' ;
+				$txt=$txt.$this->autofocus.' ' ;
 				$txt=$txt.'>' ;
 				$txt=$txt.'</td>';
 			}
