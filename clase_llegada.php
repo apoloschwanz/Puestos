@@ -96,9 +96,114 @@
 		public function mostrar_pagina_alta()
 		{	
 			//
+			// Acciones Especiales
+			$this->accion_especial_seleccionada = false ;
+			$this->accion_ok = '' ;
+			foreach( $this->acciones as $accion )
+			{
+				$okAccionEspecial = $this->prefijo_campo.$accion['nombre'] ;
+				if ( isset( $_REQUEST[$okAccionEspecial] ) )
+				{
+					$this->accion_especial_seleccionada = true ;
+					$this->accion_ok = $accion['nombre'] ;
+					$this->id = 0 ;
+					$ts_nom_request_id = $this->prefijo_campo.'_Id' ; 
+					if ( isset( $_REQUEST[$ts_nom_request_id] ) ) 
+						$this->id =  $_REQUEST[$ts_nom_request_id] ;
+						
+				}
+			}
+			//
+			// Post Generales
+			if (isset($_REQUEST[$this->okListaPosicion]))
+			  $this->desde = $_REQUEST[$this->okListaPosicion];
+			else
+			  $this->desde=0;
+			
+			//
+			// Acciones Clasicas 
+			
+			//
 			//
 			$tb_armar_pagina = false ;
-			if ( isset( $_POST[$this->okSalir] ) )
+			if ( $this->accion_especial_seleccionada )
+			{
+				$this->maneja_evento_accion_especial();
+			}
+			// Agregar
+			elseif ( isset($_POST[$this->okAgregar]) )
+			{
+				$this->mostrar_alta();
+			}
+			// Modificar
+			elseif ( isset($_GET[$this->okModificar]) )
+			{
+				//
+				// Edita
+				$nomid = $this->obtiene_prefijo_campo().'_Id' ;
+				$this->Set_id($_REQUEST[$nomid]) ;
+				$this->mostrar_edicion();
+				//muestra_modificar($Entidad) ;
+			}
+			elseif ( isset($_POST[$this->okBorrarUno]) )
+			{
+				//
+				// Edita
+				$this->Set_id($_REQUEST[$this->okBorrarUno]) ;
+				$this->mostrar_eliminacion();
+				//muestra_modificar($Entidad) ;
+			}
+			elseif ( isset($_GET[$this->okVer]) )
+			{
+				//
+				// Edita
+				$nomid = $this->obtiene_prefijo_campo().'_Id' ;
+				$this->Set_id($_REQUEST[$nomid]) ;
+				$this->mostrar_vista();
+			}
+			elseif ( isset( $_POST[$this->okGrabar] ) )
+			{
+				// Graba Modificaciones
+				$this->texto_actualizar_okGrabar();
+				if ( $this->hay_error() == true ) $this->muestra_error() ;
+				else $tb_armar_pagina = true ;// $this->muestra_ok('Registro # '.$this->id().' actualizado') ;
+			}
+			elseif ( isset($_POST[$this->okGrabaBorrarUno]) )
+			{
+				//
+				// Confirma Borrar
+				$this->texto_eliminar_okGrabar();
+				if ( $this->hay_error() == true ) $this->muestra_error() ;
+				else $tb_armar_pagina = true ;// $this->muestra_ok('Registro # '.$this->id().' eliminado') ;
+			}
+			elseif ( isset($_POST[$this->okListaSiguiente]) )
+			{
+				//
+				// Mostrar Lista Siguiente
+				$this->desde += $this->cuenta ;
+				$tb_armar_pagina = true ;
+			}
+			elseif ( isset($_POST[$this->okListaAnterior]) )
+			{
+				//
+				// Mostrar Lista Anterior
+				$this->desde -= $this->cuenta ;
+				$tb_armar_pagina = true ;
+			}
+			elseif ( isset($_POST[$this->okListaPrimero]) )
+			{
+				//
+				// Mostrar Lista Primero
+				$this->desde = 0 ;
+				$tb_armar_pagina = true ;
+			}
+			elseif ( isset($_POST[$this->okListaUltimo]) )
+			{
+				//
+				// Mostrar Lista Ultimo
+				$tb_armar_pagina = true ;
+			}
+			elseif ( isset( $_POST[$this->okSalir] ) )
 			{
 				$this->ok_Salir() ;
 			}
