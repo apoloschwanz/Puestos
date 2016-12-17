@@ -11,6 +11,7 @@ class campo_entidad {
 	protected $busqueda ;
 	protected $valor ;
 	protected $readonly ;
+	protected $autofocus ;
 	public function __construct($nombre_del_campo,$tipo = 'text',$descripcion=NULL,$objeto_del_campo=NULL,$forzar_mostrar=false)
 	{
 		$this->nombre = $nombre_del_campo ;
@@ -25,6 +26,8 @@ class campo_entidad {
 		$this->readonly = false ;
 	}
 	public function nombre() { return $this->nombre ; }
+	public function autofocus() { return $this->autofocus ; }
+	public function pone_autofocus() { $this->autofocus = true ; }
 	public function tipo() { return $this->tipo ; }
 	public function descripcion() { return $this->descripcion ; }
 	public function objeto() { return $this->objeto ; }
@@ -243,7 +246,7 @@ class entidadj {
 		//
 		// Paginacion
 		$this->desde = 0 ;																					// by DZ 2015-08-14 - agregado lista de datos
-		$this->cuenta = 10 ;																				// by DZ 2015-08-14 - agregado lista de datos		
+		$this->cuenta = 16 ;																				// by DZ 2015-08-14 - agregado lista de datos		
 		//
 		// Acciones Extra para texto_mostrar_abm
 		//$this->acciones[] = array( 'nombre'=>'okAsignarDte' , 'texto'=>'AsignarDte' ) ;
