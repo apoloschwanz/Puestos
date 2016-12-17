@@ -7,7 +7,7 @@
 			//
 			// tipos:  'pk' 'fk' 'otro' 'date' 'datetime' 'time' 'number' 'email' 'url' 'password'
 			//								el tipo 'fk' espera que se defina una clase 
-			//$this->clave_manual_activar() ; // La clave de la entidad se ingresa manualment
+			$this->clave_manual_activar() ; // La clave de la entidad se ingresa manualment
 			$this->lista_campos_lista=array();
 			$this->lista_campos_lista[]=new campo_entidad( 'Id' 			, 'pk' 		, '#' , NULL ,true) ;
 			$this->lista_campos_lista[]=new campo_entidad( 'Nombre' 	, 'text' 	, 'Nombre'  ) ;
@@ -111,8 +111,7 @@
 								CREATE TABLE corredor
 								( 	Id INT PRIMARY KEY AUTO_INCREMENT ,
 									Nombre varchar(150) ,
-									Carrera_Id INT,
-									Inicio INT
+									Carrera_Id INT
 								) ;
 							" ;
 		}
