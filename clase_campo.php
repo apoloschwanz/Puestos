@@ -36,7 +36,7 @@ class Campo {
 	{
 		$this->autofocus = 'autofocus' ;
 	}
-	protected function saca_autofocus()
+	public function saca_autofocus()
 	{
 		$this->autofocus = '' ;
 	}

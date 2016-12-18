@@ -102,7 +102,7 @@
 		$this->strsql .=  'WHERE Carrera_Id = '."'".$this->carrera_id."' " ;
 		//
 		// orden
-		$this->strsql .=  ' Order By Carrera_Id, Tiempo ' ;
+		$this->strsql .=  ' Order By Carrera_Id, Tiempo ,Orden' ;
 		
 		
 	}
