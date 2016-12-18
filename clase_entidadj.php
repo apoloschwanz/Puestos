@@ -246,7 +246,7 @@ class entidadj {
 		//
 		// Paginacion
 		$this->desde = 0 ;																					// by DZ 2015-08-14 - agregado lista de datos
-		$this->cuenta = 16 ;																				// by DZ 2015-08-14 - agregado lista de datos		
+		$this->cuenta = 20 ;																				// by DZ 2015-08-14 - agregado lista de datos		
 		//
 		// Acciones Extra para texto_mostrar_abm
 		//$this->acciones[] = array( 'nombre'=>'okAsignarDte' , 'texto'=>'AsignarDte' ) ;

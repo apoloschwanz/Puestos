@@ -1,4 +1,5 @@
 <?php
+require_once('/ent/clase_entorno.php');
 
 class Conexion {
   public $conexion;
@@ -7,6 +8,7 @@ class Conexion {
   private $usr ;
   private $pass ;
   private $db ;
+  private $entorno ;
   private $extension ;
   public function __construct()
   {
@@ -14,8 +16,19 @@ class Conexion {
 	// Levanta directorio raiz
 	$this->dr = $_SERVER['DOCUMENT_ROOT'] ;
 	//
+	// Entorno
+	$this->entorno = new entorno();
+	//
 	// Guindor
-	if($this->dr == 'C:/wamp64/www' )
+	if($this->dr == 'C:/wamp64/www' && $this->entorno->es_des()  )
+		{
+		$this->db = 'puestos_test' ;
+		$this->host = 'localhost';		
+		$this->usr = 'root';
+		$this->pass = '' ;
+		$this->extension = 'mysql' ;
+		}
+	if($this->dr == 'C:/wamp64/www' && $this->entorno->es_respaldo() )
 		{
 		$this->db = 'puestos' ;
 		$this->host = 'localhost';		
@@ -25,7 +38,7 @@ class Conexion {
 		}
 	//
 	// Mint
-	if($this->dr == '/var/www/html' )
+	if($this->dr == '/var/www/html' && $this->entorno->es_prod())
 		{
 		$this->db = 'puestos' ;
 		$this->host = 'localhost';		
@@ -73,6 +86,10 @@ class db {
 	protected function creardb()
 	{
 		$txt = " CREATE DATABASE puestos CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ; " ;
+	}
+	protected function create_test_db()
+	{
+		$txt = "  CREATE DATABASE puestos_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ; " ;
 	}
 }
 
