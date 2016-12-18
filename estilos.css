@@ -10,18 +10,16 @@ form { height: 98%; }
 		width: 100% ;
   }
   .tablaext h2{
-		margin: 1px;
+		margin: 5px;
   }
 	.tablaext th{  
-    margin:1px;
+    margin:2px;
 	}
   .tablacert {
     border-collapse: collapse;
     box-shadow: 0px 0px 8px #000;
     margin:auto;
     background-color:#eaeaec;
-    width: 98% ;
-    height: 98%;	
   }
   .tablaenc {
     border-collapse: collapse;
@@ -32,15 +30,13 @@ form { height: 98%; }
     margin: auto;
   }
   .tabladet th{  
-    border: none;
+    border: 1px solid #000;
     padding: 3px;
     background-color:#dddddf;	
     
   }  
   .tabladet td{  
     padding: 3px;	  
-    border-collapse: collapse;
-    border: 1px solid #bfbfbe;
     
   }
   .tabladet tr{  
@@ -48,6 +44,21 @@ form { height: 98%; }
     padding: 5px;
     background-color:#eaeaec;	  
   }
+  
+  .tabladet tr:nth-child(odd) {
+		background-color:#CCD1D7;
+	}
+	.tabladet tr:nth-child(odd):hover {
+		background-color: #16D6B0;
+	}
+	.tabladet tr:nth-child(even) {
+		background-color:#E8EBED;
+	}
+	.tabladet tr:nth-child(even):hover {
+		background-color: #16D6B0;
+	}
+  
+  
   
   
 	.tabladet_alternado {
