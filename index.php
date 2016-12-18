@@ -1,5 +1,5 @@
 <?php 
-	header( 'location: carga_llegada.php');
+	header( 'location: carga_llegada_peloton.php');
 	/*
 	 require_once 'class_paginai.php' ; 
 	require_once 'clases_base.php' ;
